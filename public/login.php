@@ -18,7 +18,7 @@
     <?php
     if (!empty($_POST["username"]) && !empty($_POST["password"])) {
         try {
-            include "connection.php";
+            include "../src/auth/connection.php";
             $sql = "SELECT * FROM Users WHERE name=:name;";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(":name", $_POST["username"], PDO::PARAM_STR);
@@ -26,7 +26,7 @@
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user && password_verify($_POST["password"], $user['password'])) {
                 $_SESSION["id"] = $user['user_id'];
-                header("Location: home.php");
+                header("Location: index.php");
                 exit();
             }
         } catch (Exception $e) {
