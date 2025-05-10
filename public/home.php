@@ -168,7 +168,7 @@ $user_id = $_SESSION['id'] ?? '';
 
         async function fetchPosts(trackId) {
             try {
-                const res = await fetch(`get_posts.php?track_id=${trackId}`);
+                const res = await fetch(`../src/posts/get_posts.php?track_id=${trackId}`);
                 const posts = await res.json();
                 const postSection = document.getElementById('post-section');
                 posts.forEach(post => {
@@ -201,7 +201,7 @@ $user_id = $_SESSION['id'] ?? '';
 
         async function TrackInfo(trackId) {
             try {
-                const res = await fetch(`get_trackInfo.php?track_id=${trackId}`);
+                const res = await fetch(`../src/track/get_trackInfo.php?track_id=${trackId}`);
                 const count = await res.json();
                 document.getElementById('post-count').textContent = count;
             } catch (e) {
@@ -211,7 +211,7 @@ $user_id = $_SESSION['id'] ?? '';
 
         async function fetchUserPosts(uid) {
             try {
-                const res = await fetch(`get_userPosts.php?user_id=${uid}`);
+                const res = await fetch(`../src/posts/get_userPosts.php?user_id=${uid}`);
                 const posts = await res.json();
                 const section = document.getElementById('user-posts-section');
                 if (posts.length === 0) {
@@ -241,7 +241,7 @@ $user_id = $_SESSION['id'] ?? '';
 
         async function RemovePost(postId) {
             try {
-                const res = await fetch('remove_post.php', {
+                const res = await fetch('../src/posts/remove_post.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -312,7 +312,7 @@ $user_id = $_SESSION['id'] ?? '';
             formData.append('post', text);
             formData.append('track_name', document.getElementById('track-name-hidden').textContent);
 
-            fetch('post.php', {
+            fetch('../src/posts/post.php', {
                     method: 'POST',
                     body: formData
                 }).then(res => res.text())

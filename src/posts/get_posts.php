@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 try {
-    include "connection.php";
+    include "../auth/connection.php";
 } catch (PDOException $e) {
     error_log("Connection failed: " . $e->getMessage()); // エラーメッセージをログに記録
     echo json_encode(['error' => 'Connection failed']);

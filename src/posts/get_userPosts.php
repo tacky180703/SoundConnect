@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 try {
-    include "connection.php";
+    include "../auth/connection.php";
     $posts = [];
     $user_id = $_GET['user_id'] ?? '';
     if ($user_id) {

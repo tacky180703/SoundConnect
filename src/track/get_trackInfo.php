@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 try {
-    include "connection.php";
+    include "../auth/connection.php";
     $track_id = $_GET['track_id'] ?? '';
     if ($track_id) {
         $stmt = $pdo->prepare("SELECT COUNT(*) AS post_count FROM Posts WHERE track_id = :track_id;");

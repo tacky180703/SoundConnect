@@ -2,7 +2,7 @@
 session_start();
 if (!empty($_POST["post"]) && !empty($_POST["track_id"]) && !empty($_POST["position"]) && !empty($_POST["track_name"])) {
     try {
-        include "connection.php";
+        include "../auth/connection.php";
         $sql = "SELECT COUNT(*) FROM Tracks WHERE track_id=:track_id;";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':track_id', $_POST["track_id"], PDO::PARAM_STR);
