@@ -1,0 +1,304 @@
+:root{
+    --main-bg-color: rgb(18,18,18);
+    --sub-bg-color:rgb(41,41,41);
+    --text-color:rgb(255,255,255);
+    --sub-text-color:rgb(184,184,184);
+    --spotify-green-color:rgb(30, 215, 96);
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width:100%;
+    height: 100vh;
+    color:white;
+}
+
+.now-playing{
+    flex:7;
+    margin:5px;
+    padding: 10px;
+    background-color: #121212;
+    border-radius: 16px;
+}
+
+#track-name{
+    font-weight: bold;
+    font-size: 24px;
+}
+#artist-name {
+    color:var(--sub-text-color);
+}
+
+#post-count{
+    color:var(--sub-text-color);
+}
+
+.now-playing img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex; /* 要素を左右に分ける */
+    background-color: black;
+    overflow: hidden;
+}
+.setting{
+    flex :1;
+    margin:5px;
+    padding: 10px;
+    background-color: #121212;
+    border-radius: 16px;
+}
+.menu{
+    flex :1;
+    margin:5px;
+    padding: 10px;
+    background-color: #121212;
+    border-radius: 16px;
+}
+.left{ /* 各要素の幅を調整 */
+    flex:1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 16px;
+    text-align: left;
+}
+
+.middle{
+    flex:1;
+    margin:5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    border-radius: 16px;
+    text-align: left;
+}
+
+.right{
+    flex:1;
+    margin:5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    border-radius: 16px;
+    text-align: left;
+}
+
+.post-section {
+    flex: 1;
+    overflow-y: auto; /* コンテンツが多い場合のスクロール */
+    padding-bottom: 523px; /* 投稿フォームの高さ分のスペースを確保 */
+}
+.user-posts-section {
+    flex: 1;
+    overflow-y: auto; /* コンテンツが多い場合のスクロール */
+}
+
+
+.post-section::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+.post-form {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--main-bg-color);
+    bottom: 0;
+    left: 0;
+    width: 97.5%;
+}
+
+.post-form textarea {
+    flex: 1;
+    padding: 10px;
+    background-color: var(--main-bg-color);
+    color:white;
+    border: 1px solid var(--sub-text-color);
+    border-radius: 4px;
+    resize: none;
+}
+.post-form textarea:focus {
+    border-color: var(--spotify-green-color); /* フォーカス時のボーダー色 */
+    outline: none;
+}
+
+.post-form button {
+    margin: 10px;
+    padding: 20px;
+    background-color: var(--sub-text-color);
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.post-form button:hover {
+    background-color: var(--spotify-green-color);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+.post{
+    opacity:0;
+    margin:10px;
+    padding:10px;
+    display: flex;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-color:var(--sub-bg-color);
+    animation: fadeIn 0.5s forwards;
+}
+
+.post-left{
+    flex:5;
+}
+
+.post-right{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    font-weight: bold;
+    font-size: 16px;
+}
+.fadeOut {
+    animation: fadeOut 0.5s forwards;
+}
+
+.play-button {
+    background: none;
+    border: none;
+    padding: 25%;
+    cursor: pointer;
+}
+
+.play-button img {
+    display: block;
+    width: 100%; /* 必要に応じて調整 */
+    height: auto;
+}
+
+.color-change {
+    transition: transform 0.3s ease;
+}
+
+/* ホバー時のシルエット画像の色を赤に変更 */
+.play-button:hover .color-change {
+    transform: scale(1.2);
+}
+
+.toggle_switch {
+    flex:1;
+    display: table;
+    margin:5px;
+}
+
+/* インプット要素を非表示に */
+.toggle_switch > input {
+    display: none;
+}
+
+/* トグルラベルのスタイル */
+.toggle_label {
+    display: block;
+    position: relative;
+    width: 3em;
+    height: 1.5em;
+    border-radius: 1.5em;
+    background-color: var(--sub-text-color);
+    cursor: pointer; /* クリック可能なカーソルに */
+}
+
+/* トグルがオンのときの背景色 */
+.toggle_switch > input:checked + .toggle_label {
+  background-color: var(--spotify-green-color); /* お好みで！ */
+}
+
+/* トグルボタンのデザイン */
+.toggle_label::before {
+    position: absolute;
+    top: 0.25em;
+    left: 0.25em;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: 0.3s; /* アニメーションの速さ */
+    content: ""; /* スイッチの背景 */
+}
+
+/* トグルがオンのときのボタン位置 */
+.toggle_switch > input:checked + .toggle_label::before {
+    left: calc(100% - 1.25em);
+}
+
+.option{
+    display: flex;
+    margin:5px;
+    padding: 10px;
+    border-radius: 16px;
+    background-color: var(--sub-bg-color);
+    text-align: center;
+}
+.option_text{
+    flex:5;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 3px;
+}
+.remove-button {
+    background: none;
+    border: none;
+    padding: 25%;
+    cursor: pointer;
+}
+
+.remove-button img {
+    display: block;
+    width: 100%; /* 必要に応じて調整 */
+    height: auto;
+}
+
+.color-change {
+    filter: invert(100%) brightness(1000%);
+    transition: transform 0.3s ease;
+}
+
+/* ホバー時のシルエット画像の色を赤に変更 */
+.remove-button:hover .color-change {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(100%) saturate(7471%) hue-rotate(357deg) brightness(99%) contrast(107%);
+    transform: scale(1.2);
+}
