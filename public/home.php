@@ -274,31 +274,50 @@ $user_id = $_SESSION['id'] ?? '';
             }).catch(err => console.error(err));
         }
 
-        function findClosestPost(target) {
-            const posts = document.getElementsByClassName('post');
-            let closest = null;
+        async function findClosestPost(target) {
+            const postSection = document.getElementById('post-section');
+            const posts = postSection.getElementsByClassName('post');
+            if (posts.length === 0) return null;
+
+            let closestPost = null;
             let minDiff = Infinity;
-            Array.from(posts).forEach(post => {
-                const pos = parseInt(post.getAttribute('positionMs'));
-                const diff = target - pos;
-                if (diff >= 0 && diff < minDiff) {
-                    closest = post;
-                    minDiff = diff;
+            console.log(posts.length);
+            for (let i = 0; i < posts.length; i++) { // 修正: ループの開始インデックスを0に
+                const post = posts[i];
+                const position = parseInt(post.getAttribute('positionMs'));
+                if (position <= target) {
+                    const diff = target - position;
+
+                    if (diff < minDiff) {
+                        closestPost = post;
+                        minDiff = diff;
+                    }
                 }
-            });
-            if (closest && closest !== previousClosestPost) {
-                if (previousClosestPost) previousClosestPost.style.border = '1px solid transparent';
-                closest.style.border = '2px solid var(--spotify-green-color)';
-                if (autoScroll) ScrollToClosestPost(closest);
-                previousClosestPost = closest;
             }
+
+            if (closestPost && closestPost !== previousClosestPost) {
+                if (previousClosestPost) {
+                    previousClosestPost.style.border = '1px solid transparent'; // 前の最も近いポストのボーダーをリセット
+                }
+                closestPost.style.border = '2px solid var(--spotify-green-color)'; // 新しい最も近いポストにボーダーを追加
+                if (autoScroll) {
+                    ScrollToClosestPost(closestPost);
+                }
+                previousClosestPost = closestPost; // 現在の最も近いポストを保存
+            }
+
+            return closestPost;
         }
 
         function ScrollToClosestPost(post) {
             if (!post) return;
-            post.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
+            const container = document.getElementById('post-section');
+            const extraSpace = 90; // ← コメント欄の中での余白
+            const offsetTop = post.offsetTop;
+
+            container.scrollTo({
+                top: offsetTop - extraSpace,
+                behavior: 'smooth'
             });
         }
 
