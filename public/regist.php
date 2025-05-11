@@ -22,7 +22,7 @@
     <?php
     if (!empty($_POST["user_id"]) && !empty($_POST["password"])) {
         try {
-            include "../auth/connection.php";
+            include "../src/auth/connection.php";
             if ($_POST['password'] == $_POST['confirm_password']) {
                 $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $sql = "INSERT INTO Users(name,password) VALUES(:name,:password);";
@@ -31,7 +31,7 @@
                 $stmt->bindValue(":password", $hashed_password, PDO::PARAM_STR);
                 $stmt->execute();
 
-                header("Location: ../../public/login.php");
+                header("Location: login.php");
                 exit();
             }
         } catch (Exception $e) {
