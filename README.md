@@ -23,6 +23,8 @@ SoundConnectはSpotifyユーザー向けのコミュニティサービスです�
 -  コメント機能
 -  再生位置に合わせてコメントをオートスクロール
 -  コメントの再生位置へシーク
+
+▼参考映像
 <img src="./docs/demo.gif" alt="GIF" width="800" />
 
 ---
